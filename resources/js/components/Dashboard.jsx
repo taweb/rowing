@@ -1,18 +1,30 @@
-import React, { Component } from 'react';
+import React , { useEffect } from 'react';
+import { connect } from 'react-redux';
+import axios from '../data/axios';
+// import { userGet } from '../data/actions';
 
-class Dashboard extends Component {
-    logout() {
-        console.log('logout now');
-    }
 
-    render() { 
-        return (
-            <div>
-                <h1>Welcome, Tim</h1>
-                <button className="btn btn-primary" onClick={this.logout}>Logout</button>
-            </div>
-        )
-    }
+const Dashboard = (props) => {
+    useEffect(() => {
+        // props.userGet().catch(error => {
+        //     console.log(error);
+        // })
+        
+    }, [])
+
+    return (
+        <div>
+            <h1>Welcome, {props.user.id}</h1>
+        </div>
+    )
 }
+
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+    userGet: () => dispatch(userGet())
+})
  
-export default Dashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
